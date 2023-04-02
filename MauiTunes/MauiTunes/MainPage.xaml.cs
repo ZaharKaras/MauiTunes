@@ -1,12 +1,17 @@
-﻿namespace MauiTunes;
+﻿using MauiTunes.Services;
+using SpotifyAPI.Web;
+
+namespace MauiTunes;
 
 public partial class MainPage : ContentPage
 {
 	int count = 0;
+	private ISpotifyService spotifyService;
 
 	public MainPage()
 	{
 		InitializeComponent();
+		spotifyService = new SpotifyService();
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)

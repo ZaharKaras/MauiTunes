@@ -1,4 +1,4 @@
-﻿using AndroidX.Browser.Trusted;
+﻿//using AndroidX.Browser.Trusted;
 using MauiTunes.Entities;
 using Newtonsoft.Json;
 using RestSharp;
@@ -34,7 +34,7 @@ namespace MauiTunes.Services
             if (response.IsSuccessStatusCode)
             {
                 token = JsonConvert.DeserializeObject<AuthorizationToken>(response.Content);
-            }
+            } 
 
             return token;
         }

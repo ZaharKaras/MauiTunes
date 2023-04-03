@@ -18,8 +18,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+		builder.Services.AddSingleton<MainPage>();
+		builder.Services.AddTransient<ISpotifyAccountService, SpotifyAccountService>();
 		builder.Services.AddTransient<ISpotifyService, SpotifyService>();
-		//builder.Services.AddHttp
+		builder.Services.AddHttpClient<ISpotifyAccountService, SpotifyAccountService>(opt => opt.BaseAddress = new Uri("https://accounts.spotify.com/api/token"));
+		builder.Services.AddHttpClient<ISpotifyService, SpotifyService>(opt => opt.BaseAddress = new Uri("https://accounts.spotify.com"));
 
 //#if DEBUG
 //		builder.Logging.AddDebug();

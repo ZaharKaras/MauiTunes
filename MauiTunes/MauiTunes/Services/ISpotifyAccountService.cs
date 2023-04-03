@@ -1,4 +1,5 @@
-﻿using AndroidX.Browser.Trusted;
+﻿//using AndroidX.Browser.Trusted;
+using MauiTunes.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

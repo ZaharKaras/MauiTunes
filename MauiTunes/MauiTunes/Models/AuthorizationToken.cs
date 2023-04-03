@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MauiTunes.Entities
 {
-    public class Token
+    public class AuthorizationToken
     {
         [JsonProperty("access_token")]
         public string AccessToken { get; set; }

@@ -6,12 +6,14 @@ namespace MauiTunes;
 public partial class MainPage : ContentPage
 {
 	int count = 0;
-	private ISpotifyService spotifyService;
+	private ISpotifyAccountService _spotifyAccountService { get; init; }
+	private ISpotifyService _spotifyService { get; init; }
 
-	public MainPage()
+	public MainPage(ISpotifyAccountService spotifyAccountService, ISpotifyService spotifyService)
 	{
 		InitializeComponent();
-		//spotifyService = new SpotifyService();
+		_spotifyAccountService = spotifyAccountService;
+		_spotifyService = spotifyService;
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)

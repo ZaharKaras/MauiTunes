@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Net.Http;
+using MauiTunes.Services;
+
 
 namespace MauiTunes;
 
@@ -15,9 +18,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-#if DEBUG
-		builder.Logging.AddDebug();
-#endif
+		builder.Services.AddTransient<ISpotifyService, SpotifyService>();
+		//builder.Services.AddHttp
+
+//#if DEBUG
+//		builder.Logging.AddDebug();
+//#endif
 
 		return builder.Build();
 	}

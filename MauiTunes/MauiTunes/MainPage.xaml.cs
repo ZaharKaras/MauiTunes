@@ -11,7 +11,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-		spotifyService = new SpotifyService();
+		//spotifyService = new SpotifyService();
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)

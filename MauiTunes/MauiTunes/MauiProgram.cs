@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using MauiTunes.Services;
-
+using RestSharp;
 
 namespace MauiTunes;
 
@@ -18,16 +18,24 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddTransient<ISpotifyAccountService, SpotifyAccountService>();
-		builder.Services.AddTransient<ISpotifyService, SpotifyService>();
-		builder.Services.AddHttpClient<ISpotifyAccountService, SpotifyAccountService>(opt => opt.BaseAddress = new Uri("https://accounts.spotify.com/api/token"));
-		builder.Services.AddHttpClient<ISpotifyService, SpotifyService>(opt => opt.BaseAddress = new Uri("https://accounts.spotify.com"));
+        // Регистрация RestClient в DI-контейнере
+        //builder.Services.AddSingleton<RestClient>();
 
-//#if DEBUG
-//		builder.Logging.AddDebug();
-//#endif
+        // Регистрация сервисов в DI-контейнере
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<ISpotifyAccountService, SpotifyAccountService>();
+        builder.Services.AddTransient<ISpotifyService, SpotifyService>();
 
-		return builder.Build();
+        // Регистрация HttpClient и настройка BaseAddress для каждого сервиса
+        //builder.Services.AddHttpClient<ISpotifyAccountService, SpotifyAccountService>(opt => opt.BaseAddress = new Uri("https://accounts.spotify.com/api/token"));
+        //builder.Services.AddHttpClient<ISpotifyService, SpotifyService>(opt => opt.BaseAddress = new Uri("https://accounts.spotify.com"));
+
+
+
+        //#if DEBUG
+        //		builder.Logging.AddDebug();
+        //#endif
+
+        return builder.Build();
 	}
 }

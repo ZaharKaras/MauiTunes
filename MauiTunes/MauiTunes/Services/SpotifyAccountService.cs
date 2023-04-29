@@ -12,13 +12,12 @@ namespace MauiTunes.Services
 {
     public class SpotifyAccountService: ISpotifyAccountService
     {
-        private readonly RestClient _client;
+        private RestClient _client;
         
-        public SpotifyAccountService(RestClient client)
+        public SpotifyAccountService()
         {
-            _client = client;
+            _client = new RestClient("https://accounts.spotify.com/api/token");
         }
-
         public async Task<AuthorizationToken> GetToken(string clientId, string clientSecret)
         {
             var token = new AuthorizationToken();
@@ -38,5 +37,19 @@ namespace MauiTunes.Services
 
             return token;
         }
+        //public async Task<IEnumerable<Track>> GetLikedTracks(AuthorizationToken token)
+        //{
+        //    var tracks = new List<Track>();
+        //    var request = new RestRequest("https://api.spotify.com/v1/me/tracks");
+        //    request.AddHeader(token.TokenType, token.AccessToken);
+
+        //    var response = await _client.GetAsync(request);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        tracks = JsonConvert.DeserializeObject<List<Track>>(response.Content);
+        //    }
+
+        //    return tracks;
+        //}
     }
 }

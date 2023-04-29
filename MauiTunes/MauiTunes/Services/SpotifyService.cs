@@ -1,30 +1,23 @@
-﻿using AndroidX.Browser.Trusted;
-using MauiTunes.Entities;
+﻿using MauiTunes.Entities;
+using MauiTunes.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RestSharp;
-using SpotifyAPI.Web;
-using SpotifyAPI.Web.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MauiTunes.Services
 {
     public class SpotifyService : ISpotifyService
     {
         private readonly RestClient _client;
-        public SpotifyService(RestClient client)
+        public SpotifyService()
         {
-            _client = client;
+            _client = new RestClient("https://accounts.spotify.com");
         }
         public async Task<IEnumerable<Album>> GetAlbums(string albumName, AuthorizationToken token)
         {
             var albums = new List<Album>();
             var request = new RestRequest("/v1/search");
-            request.AddHeader("Authorization", $"Bearer {token.AccessToken}");
+            request.AddHeader("Authorization", $"{token.TokenType} {token.AccessToken}");
             request.AddParameter("q", albumName);
             request.AddParameter("type", "album");
             
@@ -38,14 +31,55 @@ namespace MauiTunes.Services
             return albums;
         }
 
-        public Task<IEnumerable<Artist>> GetArtis(string artistName)
+        public async Task<SearchResult> GetArtist(string artistName, AuthorizationToken token)
         {
-            throw new NotImplementedException();
+            var client = new RestClient("https://api.spotify.com/v1/search");
+            client.AddDefaultHeader("Authorization", $"Bearer {token.AccessToken}");
+            var request = new RestRequest($"?q={artistName}&type=artist", Method.Get);
+            var response = await client.ExecuteAsync(request);
+
+            if (response.IsSuccessful)
+            {
+                var result = JsonConvert.DeserializeObject<SearchResult>(response.Content);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Task<IEnumerable<Track>> GetTracks(string trackName)
+        public async Task<SearchResult> GetTracks(string trackName, AuthorizationToken token)
         {
-            throw new NotImplementedException();
+            //var tracks = new List<Track>();
+            //var request = new RestRequest("/v1/search");
+            //request.AddHeader("Authorization", $"{token.TokenType} {token.AccessToken}");
+            //request.AddParameter("q", trackName);
+            //request.AddParameter("type", "track");
+
+            //var response = await _client.GetAsync(request);
+
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    tracks = JsonConvert.DeserializeObject<List<Track>>(response.Content);
+            //}
+
+            //return tracks;
+
+            var client = new RestClient("https://api.spotify.com/v1/search");
+            client.AddDefaultHeader("Authorization", $"Bearer {token.AccessToken}");
+            var request = new RestRequest($"?q={trackName}&type=track", Method.Get);
+            var response = await client.ExecuteAsync(request);
+
+            if (response.IsSuccessful)
+            {
+                var result = JsonConvert.DeserializeObject<SearchResult>(response.Content);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

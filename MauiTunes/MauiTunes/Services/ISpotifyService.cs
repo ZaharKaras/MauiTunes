@@ -1,4 +1,5 @@
 ﻿using MauiTunes.Entities;
+using MauiTunes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace MauiTunes.Services
     public interface ISpotifyService
     {
         Task<IEnumerable<Album>> GetAlbums(string albumName, AuthorizationToken token);
-        Task<IEnumerable<Artist>> GetArtis(string artistName);
-        Task<IEnumerable<Track>> GetTracks(string trackName);
+        Task<SearchResult> GetArtist(string artistName, AuthorizationToken token);
+        Task<SearchResult> GetTracks(string trackName, AuthorizationToken token);
     }
 }

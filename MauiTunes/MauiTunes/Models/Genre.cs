@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiTunes.Entities
+namespace MauiTunes.Models
 {
-    public class Artist
+    public class Genre
     {
+        public string Name { get; set; }
     }
 }

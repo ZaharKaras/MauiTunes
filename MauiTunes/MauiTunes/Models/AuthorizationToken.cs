@@ -14,6 +14,6 @@ namespace MauiTunes.Entities
         [JsonProperty("token_type")]
         public string TokenType { get; set; }
         [JsonProperty("expires_in")]
-        public string ExpiresIn { get; set; } 
+        public string ExpiresIn { get; set; }
     }
 }

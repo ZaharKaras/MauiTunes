@@ -140,7 +140,7 @@ namespace MauiTunes.Models
     {
         [JsonPropertyName("href")]
         public object Href { get; set; }
-
+        
         [JsonPropertyName("total")]
         public int Total { get; set; }
     }

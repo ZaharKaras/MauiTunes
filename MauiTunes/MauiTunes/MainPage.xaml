@@ -4,6 +4,7 @@
              x:Class="MauiTunes.MainPage">
 
     <ScrollView>
+
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
@@ -21,19 +22,20 @@
                         Grid.Column="1" BackgroundColor="DarkGrey"/>
             </Grid>
 
+
             <CollectionView x:Name="albumsList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>
-                            <Label Text="{Binding Name}"/>
+                            <Button Text="{Binding Name}" Clicked="Button_Clicked_1Async"/>
                             <Label Text="{Binding Artists[0].Name}" BackgroundColor="ForestGreen"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            
         </VerticalStackLayout>
+
     </ScrollView>
 
 </ContentPage>

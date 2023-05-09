@@ -49,16 +49,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+		<PackageReference Include="NAudio" Version="2.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Plugin.Maui.Audio" Version="1.0.0" />
 		<PackageReference Include="RestSharp" Version="110.2.1-alpha.0.1" />
 		<PackageReference Include="SpotifyAPI.Web" Version="7.0.0" />
+		<PackageReference Include="TinyMvvm.Maui" Version="4.1.0" />
+		<PackageReference Include="VisioForge.DotNet.Core.TRIAL" Version="15.1.12" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="View\" />
+	  <MauiXaml Update="Views\SearchView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

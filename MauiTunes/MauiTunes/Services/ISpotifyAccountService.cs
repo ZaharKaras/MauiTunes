@@ -11,6 +11,5 @@ namespace MauiTunes.Services
     public interface ISpotifyAccountService
     {
         Task<AuthorizationToken> GetToken(string clientId, string clientSecret);
-        //Task<IEnumerable<Track>> GetLikedTracks(AuthorizationToken token);
     }
 }

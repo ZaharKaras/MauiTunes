@@ -1,7 +1,9 @@
 ﻿//using AndroidX.Browser.Trusted;
 using MauiTunes.Entities;
+using MauiTunes.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using SpotifyAPI.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,6 @@ namespace MauiTunes.Services
     public class SpotifyAccountService: ISpotifyAccountService
     {
         private RestClient _client;
-        
         public SpotifyAccountService()
         {
             _client = new RestClient("https://accounts.spotify.com/api/token");
@@ -37,19 +38,6 @@ namespace MauiTunes.Services
 
             return token;
         }
-        //public async Task<IEnumerable<Track>> GetLikedTracks(AuthorizationToken token)
-        //{
-        //    var tracks = new List<Track>();
-        //    var request = new RestRequest("https://api.spotify.com/v1/me/tracks");
-        //    request.AddHeader(token.TokenType, token.AccessToken);
 
-        //    var response = await _client.GetAsync(request);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        tracks = JsonConvert.DeserializeObject<List<Track>>(response.Content);
-        //    }
-
-        //    return tracks;
-        //}
     }
 }

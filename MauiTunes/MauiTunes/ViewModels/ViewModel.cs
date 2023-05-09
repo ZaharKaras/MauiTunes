@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TinyMvvm;
 
-namespace MauiTunes.Models
+namespace MauiTunes.ViewModels
 {
-    public class Genre
+    public abstract class ViewModel : TinyViewModel
     {
-        public string Name { get; set; }
+        public ViewModel() { }
     }
 }

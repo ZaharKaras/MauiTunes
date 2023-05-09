@@ -10,7 +10,7 @@ namespace MauiTunes.Services
 {
     public interface ISpotifyService
     {
-        Task<IEnumerable<Album>> GetAlbums(string albumName, AuthorizationToken token);
+        Task<SearchResult> GetAlbums(string albumName, AuthorizationToken token);
         Task<SearchResult> GetArtist(string artistName, AuthorizationToken token);
         Task<SearchResult> GetTracks(string trackName, AuthorizationToken token);
     }

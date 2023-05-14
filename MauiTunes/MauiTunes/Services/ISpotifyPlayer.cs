@@ -9,6 +9,13 @@ namespace MauiTunes.Services
 {
     public interface ISpotifyPlayer
     {
-        public Task<bool> PlayTrack(string trackId, AuthorizationToken token);
+        Task<bool> PlayTrack(string trackId, AuthorizationToken token);
+        public Task PlayAudioAsync();
+        public Task StopeAudioAsync();
+        public Task PauseAudioAsync();
+        public double GetDuration();
+        public double GetPosition();
+        public string GetSource();
+
     }
 }

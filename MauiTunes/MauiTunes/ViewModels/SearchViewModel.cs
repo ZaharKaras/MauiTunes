@@ -26,6 +26,7 @@ namespace MauiTunes.ViewModels
             this.spotifyService = spotifyService;
             this.spotifyAccountService = spotifyAccountService;
             GetToken();
+
         }
 
         private async void GetToken()
@@ -56,6 +57,50 @@ namespace MauiTunes.ViewModels
         {
             IsSearching = true;
         }
+
+        [RelayCommand]
+        private async Task NavigateToArtist(string id)
+        {
+            var artist = artistsResult.FirstOrDefault(a => a.Id == id);
+
+            IDictionary<AuthorizationToken, Artist> parametrs = new Dictionary<AuthorizationToken, Artist>()
+            {
+                {token, artist}
+            };
+
+            await Navigation.NavigateTo("Artist", parametrs);
+        }
+
+        [RelayCommand]
+        private async void NavigateToAlbum(string id)
+        {
+            var album = albumsResult.FirstOrDefault(b => b.Id == id);
+
+            IDictionary<AuthorizationToken, Album> parametrs = new Dictionary<AuthorizationToken, Album>()
+            {
+                { token, album }
+            };
+
+            await Navigation.NavigateTo("Album", parametrs);
+        }
+
+        [RelayCommand]
+        private async void NavigateToTrack(string id)
+        {
+            var track = tracksResult.FirstOrDefault(b => b.Id == id);
+
+            IDictionary<AuthorizationToken, Track> parametrs = new Dictionary<AuthorizationToken, Track>()
+            {
+                {token, track}
+            };
+
+            await Navigation.NavigateTo("Track", parametrs);
+        }
+
+        private List<Artist> artistsResult;
+        private List<Track> tracksResult;
+        private List<Album> albumsResult;
+
         [RelayCommand]
         private async Task Search()
         {
@@ -69,6 +114,9 @@ namespace MauiTunes.ViewModels
                 var resultAlbums = await spotifyService.GetAlbums(SearchText, token);
                 var resultTracks = await spotifyService.GetTracks(SearchText, token);
 
+                artistsResult = resultArtists.Artists.Items;
+                tracksResult = resultTracks.Tracks.Items;
+                albumsResult = resultAlbums.Albums.Items;
 
                 var artists = resultArtists.Artists.Items.Select(x => new SearchItemViewModel()
                 {
@@ -111,23 +159,7 @@ namespace MauiTunes.ViewModels
             IsBusy = false;
         }
 
-        [RelayCommand]
-        private async Task NavigateToArtist(string id)
-        {
-            await Navigation.NavigateTo("Artist", id);
-        }
-
-        [RelayCommand]
-        private void NavigateToAlbum(string id)
-        {
-
-        }
-
-        [RelayCommand]
-        private void NavigateToTrack(string id)
-        {
-
-        }
+        
 
     }
     public class SearchItemViewModel : ViewModel

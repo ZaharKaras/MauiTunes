@@ -159,6 +159,9 @@ namespace MauiTunes.Models
 
     public class Track
     {
+        [JsonPropertyName("preview_url")]
+        public string PreviewUrl { get; set; }
+
         [JsonPropertyName("album_type")]
         public string AlbumType { get; set; }
 
@@ -224,9 +227,6 @@ namespace MauiTunes.Models
 
         [JsonPropertyName("is_local")]
         public bool IsLocal { get; set; }
-
-        [JsonPropertyName("preview_url")]
-        public string PreviewUrl { get; set; }
 
         [JsonPropertyName("track_number")]
         public int TrackNumber { get; set; }

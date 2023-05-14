@@ -49,13 +49,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\pause_button.svg" />
+	  <None Remove="Resources\Images\play_button.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-		<PackageReference Include="NAudio" Version="2.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="1.0.0" />
+		<PackageReference Include="ReactiveUI" Version="18.4.44" />
 		<PackageReference Include="RestSharp" Version="110.2.1-alpha.0.1" />
 		<PackageReference Include="SpotifyAPI.Web" Version="7.0.0" />
 		<PackageReference Include="TinyMvvm.Maui" Version="4.1.0" />
@@ -63,7 +69,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\SearchView.xaml">
+	  <MauiXaml Update="Views\AlbumView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ArtistView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TrackView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

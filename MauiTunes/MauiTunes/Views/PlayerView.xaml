@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodels="clr-namespace:MauiTunes.ViewModels"
+             x:DataType="viewmodels:PlayerViewModel"
+             x:Class="MauiTunes.Views.PlayerView"
+             Title="PlayerView">
+
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20">
+
+        <toolkit:MediaElement x:Name="mediaElement"
+                              Source="https://p.scdn.co/mp3-preview/c973eb4df46a3fb0f780964d2be3861e3b84eeff?cid=541e4eb4340743ef80eb76cb7bace234" 
+                              ShouldShowPlaybackControls="True" HeightRequest="100" WidthRequest="100" IsVisible="false"
+                              PositionChanged="OnPositionChanged"/>
+
+
+        <Grid Padding="10, 10" ColumnDefinitions="*,*" ColumnSpacing="5">
+            <Button Grid.Column="0" Text="Play" Clicked="OnPlayClicked" />
+            <Button Grid.Column="1" Text="Pause" Clicked="OnPauseClicked" />
+        </Grid>
+
+        <Slider x:Name="positionSlider"
+                WidthRequest="300"
+                MaximumTrackColor="White"
+                MinimumTrackColor="Gray"
+                DragStarted="Slider_DragStarted"
+                DragCompleted="Slider_DragCompleted"/>
+        
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mvvm:TinyView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TinyMvvm;assembly=TinyMvvm.Maui"
+             xmlns:vm="clr-namespace:MauiTunes.ViewModels"
+             x:Class="MauiTunes.Views.AlbumView"
+             x:DataType="vm:AlbumViewModel"
+             Title="AlbumView">
+
+    <VerticalStackLayout>
+        <Label Text="Tracks" FontSize="Title" />
+        <CollectionView  ItemsSource="{Binding Tracks}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:SearchItemViewModel" >
+                    <HorizontalStackLayout Spacing="10" Padding="0,0,0,10">
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                              CommandParameter="{Binding Id}" />
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <Image Source="{Binding ImageUrl, Mode=OneTime}"
+                                        WidthRequest="60"
+                                        HeightRequest="60"
+                                        Aspect="AspectFill"/>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}" FontSize="Header" VerticalOptions="Center" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+    
+</mvvm:TinyView>

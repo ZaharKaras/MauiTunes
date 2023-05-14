@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls.Compatibility;
-using MauiTunes.View;
+using MauiTunes.Views;
 using Microsoft.Maui.Controls;
 
 

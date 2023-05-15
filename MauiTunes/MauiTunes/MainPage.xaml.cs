@@ -51,7 +51,6 @@ public partial class MainPage : ContentPage
 		{
             count++;
             _spotifyPlayer.PlayAudioAsync();
-
         }
     }
 }

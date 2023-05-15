@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiTunes.Entities;
 using MauiTunes.Models;
 using MauiTunes.Services;
@@ -14,7 +15,11 @@ namespace MauiTunes.ViewModels
     public partial class TrackViewModel : ViewModel
     {
         private ISpotifyPlayer player;
-        private ISpotifyService spotifyService; 
+        private ISpotifyService spotifyService;
+        private AuthorizationToken token;
+        private string trackId;
+        [ObservableProperty]
+        public List<Track> trackQueue;
         public TrackViewModel(ISpotifyPlayer player, ISpotifyService spotifyService)
         {
             this.player = player;
@@ -29,11 +34,16 @@ namespace MauiTunes.ViewModels
             {
                 IsBusy = true;
 
-                IDictionary<AuthorizationToken, Track> parametr = (IDictionary<AuthorizationToken, Track>)NavigationParameter;
-                var token = parametr.First().Key;
-                var track = parametr.First().Value;
+                IDictionary<AuthorizationToken, IEnumerable<Track>> parametr = (IDictionary<AuthorizationToken, IEnumerable<Track>>)NavigationParameter;
+                token = parametr.First().Key;
+                var tracks = (List<Track>)parametr.First().Value;
+
+                TrackQueue = tracks.ToList();
+
+                var track = tracks.FirstOrDefault();
 
                 track = await spotifyService.GetTrackById(track.Id, token);
+                trackId = track.Id;
 
                 TopImage = track.Album.Images.Any() ? track.Album.Images.First().Url : null;
                 Name = track.Name;
@@ -54,5 +64,57 @@ namespace MauiTunes.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<SearchItemViewModel> albums = new();
+
+        [RelayCommand]
+        async Task PlayPreviousTrackAsync()
+        {
+            int index = trackQueue.FindIndex(x => x.Id == trackId);
+            index--;
+
+            if(index < 0)
+            {
+                var trackFromQueue = trackQueue.Last();
+                var track = await spotifyService.GetTrackById(trackFromQueue.Id, token);
+                trackId = track.Id;
+                TopImage = track.Album.Images.Any() ? track.Album.Images.First().Url : null;
+                Name = track.Name;
+                PreviewUrl = track.PreviewUrl;
+            }
+            else
+            {
+                var trackFromQueue = trackQueue[index];
+                var track = await spotifyService.GetTrackById(trackFromQueue.Id, token);
+                trackId = track.Id;
+                TopImage = track.Album.Images.Any() ? track.Album.Images.First().Url : null;
+                Name = track.Name;
+                PreviewUrl = track.PreviewUrl;
+            }
+        }
+
+        [RelayCommand]
+        async Task PlayNextTrack()
+        {
+            int index = trackQueue.FindIndex(x => x.Id == trackId);
+            index++;
+
+            if (index > trackQueue.Count-1)
+            {
+                var trackFromQueue = trackQueue.First();
+                var track = await spotifyService.GetTrackById(trackFromQueue.Id, token);
+                trackId = track.Id;
+                TopImage = track.Album.Images.Any() ? track.Album.Images.First().Url : null;
+                Name = track.Name;
+                PreviewUrl = track.PreviewUrl;
+            }
+            else
+            {
+                var trackFromQueue = trackQueue[index];
+                var track = await spotifyService.GetTrackById(trackFromQueue.Id, token);
+                trackId = track.Id;
+                TopImage = track.Album.Images.Any() ? track.Album.Images.First().Url : null;
+                Name = track.Name;
+                PreviewUrl = track.PreviewUrl;
+            }
+        }
     }
 }

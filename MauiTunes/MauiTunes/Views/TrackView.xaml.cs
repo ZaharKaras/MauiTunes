@@ -8,6 +8,7 @@ using TinyMvvm;
 
 public partial class TrackView
 {
+    private TrackViewModel viewmodel;
     private int count;
 	public TrackView(TrackViewModel vm)
 	{
@@ -15,6 +16,7 @@ public partial class TrackView
 		BindingContext = vm;
         mediaElement.PropertyChanged += MediaElement_PropertyChanged;
         count = 0;
+        viewmodel = vm;
     }
 
     void MediaElement_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -62,8 +64,6 @@ public partial class TrackView
         var newValue = ((Slider)sender).Value;
         mediaElement.SeekTo(TimeSpan.FromSeconds(newValue));
         mediaElement.Play();
-
-        //DependencyService.Get<>
     }
 
     void Slider_DragStarted(object sender, EventArgs e)
@@ -75,13 +75,8 @@ public partial class TrackView
     {
         base.OnAppearing();
 
-        // Остановка воспроизведения при появлении страницы
         mediaElement.Stop();
     }
-    //protected override void OnDisappearing()
-    //{
-    //    base.OnDisappearing();
 
-    //    mediaElement.Pause();
-    //}
+
 }

@@ -7,27 +7,33 @@
              x:DataType="vm:AlbumViewModel"
              Title="AlbumView">
 
-    <VerticalStackLayout>
-        <Label Text="Tracks" FontSize="Title" />
-        <CollectionView  ItemsSource="{Binding Tracks}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="vm:SearchItemViewModel" >
-                    <HorizontalStackLayout Spacing="10" Padding="0,0,0,10">
-                        <HorizontalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding TapCommand}"
+    <Grid Padding="10">
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="FillAndExpand" />
+        <ScrollView IsVisible="{Binding IsNotBusy}" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always">
+            <CollectionView  ItemsSource="{Binding Tracks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SearchItemViewModel" >
+                        <HorizontalStackLayout Spacing="10" Padding="0,0,0,10">
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}"
                                                               CommandParameter="{Binding Id}" />
-                        </HorizontalStackLayout.GestureRecognizers>
-                        <Image Source="{Binding ImageUrl, Mode=OneTime}"
+                            </HorizontalStackLayout.GestureRecognizers>
+                            <Image Source="{Binding ImageUrl, Mode=OneTime}"
                                         WidthRequest="60"
                                         HeightRequest="60"
                                         Aspect="AspectFill"/>
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Title}" FontSize="Header" VerticalOptions="Center" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
-    
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}" FontSize="Header" VerticalOptions="Center" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        
+        
+    </Grid>
+
+
 </mvvm:TinyView>

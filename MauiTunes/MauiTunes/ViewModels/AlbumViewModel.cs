@@ -27,11 +27,22 @@ namespace MauiTunes.ViewModels
         [RelayCommand]
         private async void NavigateToTrack(string id)
         {
-            var track = tracksResult.FirstOrDefault(b => b.Id == id);
+            //var track = tracksResult.FirstOrDefault(b => b.Id == id);
 
-            IDictionary<AuthorizationToken, Track> parametrs = new Dictionary<AuthorizationToken, Track>()
+            //IDictionary<AuthorizationToken, Track> parametrs = new Dictionary<AuthorizationToken, Track>()
+            //{
+            //    {token, track}
+            //};
+
+            //await Navigation.NavigateTo("Track", parametrs);
+
+            int index = tracksResult.FindIndex(s => s.Id == id);
+
+            var tracks = tracksResult.Skip(index).Concat(tracksResult.Take(index)).ToList();
+
+            IDictionary<AuthorizationToken, IEnumerable<Track>> parametrs = new Dictionary<AuthorizationToken, IEnumerable<Track>>()
             {
-                {token, track}
+                {token, tracks}
             };
 
             await Navigation.NavigateTo("Track", parametrs);

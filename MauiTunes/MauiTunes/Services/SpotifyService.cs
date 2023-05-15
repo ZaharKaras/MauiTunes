@@ -36,7 +36,7 @@ namespace MauiTunes.Services
 
         }
 
-        public async Task<SearchResult> GetAlbumsByArtistId(string artistId, AuthorizationToken token)
+        public async Task<Albums> GetAlbumsByArtistId(string artistId, AuthorizationToken token)
         {
             var client = new RestClient("https://api.spotify.com/v1/");
             client.AddDefaultHeader("Authorization", $"Bearer {token.AccessToken}");
@@ -45,7 +45,7 @@ namespace MauiTunes.Services
 
             if (response.IsSuccessful)
             {
-                var result = JsonConvert.DeserializeObject<SearchResult>(response.Content);
+                var result = System.Text.Json.JsonSerializer.Deserialize<Albums>(response.Content);
                 return result;
             }
             else

@@ -7,7 +7,7 @@ using CommunityToolkit.Maui;
 using TinyMvvm;
 using MauiTunes.ViewModels;
 using Plugin.Maui.Audio;
-using MauiTunes.Views;
+using Plugin.LocalNotification;
 //using Java.Security.Cert;
 
 namespace MauiTunes;
@@ -22,6 +22,7 @@ public static class MauiProgram
             .UseTinyMvvm()
             .UseMauiCommunityToolkit()
             .UseMauiCommunityToolkitMediaElement()
+            .UseLocalNotification()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

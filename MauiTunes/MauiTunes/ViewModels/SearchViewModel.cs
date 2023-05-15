@@ -87,11 +87,13 @@ namespace MauiTunes.ViewModels
         [RelayCommand]
         private async void NavigateToTrack(string id)
         {
-            var track = tracksResult.FirstOrDefault(b => b.Id == id);
+            int index = tracksResult.FindIndex(s => s.Id == id);
 
-            IDictionary<AuthorizationToken, Track> parametrs = new Dictionary<AuthorizationToken, Track>()
+            var tracks = tracksResult.Skip(index).Concat(tracksResult.Take(index)).ToList();
+
+            IDictionary<AuthorizationToken, IEnumerable<Track>> parametrs = new Dictionary<AuthorizationToken, IEnumerable<Track>>()
             {
-                {token, track}
+                {token, tracks}
             };
 
             await Navigation.NavigateTo("Track", parametrs);
@@ -170,4 +172,5 @@ namespace MauiTunes.ViewModels
         public string ImageUrl { get; set; }
         public ICommand TapCommand { get; set; }
     }
+
 }

@@ -46,7 +46,7 @@ public static class MauiProgram
         //ViewModel
         builder.Services.AddTransient<PlayerViewModel>();
         builder.Services.AddTransient<ArtistViewModel>();
-        builder.Services.AddTransient<TrackViewModel>();
+        builder.Services.AddSingleton<TrackViewModel>();
         builder.Services.AddTransient<AlbumViewModel>();
 
         // Регистрация HttpClient и настройка BaseAddress для каждого сервиса

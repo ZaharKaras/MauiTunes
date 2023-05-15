@@ -33,30 +33,11 @@ namespace MauiTunes.ViewModels
                 var token = parametr.First().Key;
                 var track = parametr.First().Value;
 
-                //List<Task> tasks = new();
-
                 track = await spotifyService.GetTrackById(track.Id, token);
-
-                //var artistTask = spotifyService.GetArtist(singer.Name, token);
-                //var albumsTask = spotifyService.GetAlbums(singer.Name, token);
-
-                //await Task.WhenAll(artistTask, albumsTask);
-
-                //var artist = artistTask.Result;
 
                 TopImage = track.Album.Images.Any() ? track.Album.Images.First().Url : null;
                 Name = track.Name;
                 PreviewUrl = track.PreviewUrl;
-
-                //var albumResult = albumsTask.Result.Items.Select(x => new SearchItemViewModel()
-                //{
-                //    Id = x.Id,
-                //    Title = x.Name,
-                //    SubTitle = string.Join(",", x.Artists.Select(a => a.Name)),
-                //    ImageUrl = x.Images.Any() ? x.Images.First().Url : null
-                //});
-
-                //Albums = new(albumResult);
             }
             catch (Exception ex)
             {

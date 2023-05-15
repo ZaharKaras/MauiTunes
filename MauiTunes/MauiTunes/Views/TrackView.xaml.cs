@@ -1,4 +1,4 @@
-namespace MauiTunes.Views;
+﻿namespace MauiTunes.Views;
 
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
@@ -62,10 +62,26 @@ public partial class TrackView
         var newValue = ((Slider)sender).Value;
         mediaElement.SeekTo(TimeSpan.FromSeconds(newValue));
         mediaElement.Play();
+
+        //DependencyService.Get<>
     }
 
     void Slider_DragStarted(object sender, EventArgs e)
     {
         mediaElement.Pause();
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Остановка воспроизведения при появлении страницы
+        mediaElement.Stop();
+    }
+    //protected override void OnDisappearing()
+    //{
+    //    base.OnDisappearing();
+
+    //    mediaElement.Pause();
+    //}
 }

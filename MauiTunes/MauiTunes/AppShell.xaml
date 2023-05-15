@@ -7,20 +7,20 @@
     xmlns:views="clr-namespace:MauiTunes.Views"
     Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"/>
+        Route="MainPage"/>-->
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:SearchView}"
         Route="Search"/>
 
-    <ShellContent
+    <!--<ShellContent
         Title="Player"
         ContentTemplate="{DataTemplate views:PlayerView}"
-        Route="PlayerView"/>
+        Route="PlayerView"/>-->
 
 
 </Shell>

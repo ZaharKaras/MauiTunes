@@ -116,5 +116,19 @@ namespace MauiTunes.ViewModels
                 PreviewUrl = track.PreviewUrl;
             }
         }
+
+        
+        public async Task NavigateToTrack()
+        {
+            int index = TrackQueue.FindIndex(s => s.Id == trackId);
+            var tracks = TrackQueue.Skip(index).Concat(TrackQueue.Take(index)).ToList();
+
+            IDictionary<AuthorizationToken, IEnumerable<Track>> parametrs = new Dictionary<AuthorizationToken, IEnumerable<Track>>()
+            {
+                {token, tracks}
+            };
+
+            await Navigation.NavigateTo("Track", parametrs);
+        }
     }
 }

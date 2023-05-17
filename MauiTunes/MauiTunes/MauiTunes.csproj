@@ -49,6 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\google-services.json" />
 	  <None Remove="Resources\Images\next_button.svg" />
 	  <None Remove="Resources\Images\pause_button.svg" />
 	  <None Remove="Resources\Images\play_button.svg" />
@@ -60,7 +61,6 @@
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.LocalNotification" Version="10.1.4" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="1.0.0" />
@@ -68,7 +68,7 @@
 		<PackageReference Include="RestSharp" Version="110.2.1-alpha.0.1" />
 		<PackageReference Include="SpotifyAPI.Web" Version="7.0.0" />
 		<PackageReference Include="TinyMvvm.Maui" Version="4.1.0" />
-		<PackageReference Include="VisioForge.DotNet.Core.TRIAL" Version="15.1.12" />
+		<PackageReference Include="VisioForge.DotNet.Core" Version="15.5.73" />
 	</ItemGroup>
 
 	<ItemGroup>

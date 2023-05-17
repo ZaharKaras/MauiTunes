@@ -21,8 +21,8 @@ public static class MauiProgram
 			.UseMauiApp<App>()
             .UseTinyMvvm()
             .UseMauiCommunityToolkit()
-            .UseMauiCommunityToolkitMediaElement()
             .UseLocalNotification()
+            .UseMauiCommunityToolkitMediaElement()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -41,7 +41,7 @@ public static class MauiProgram
         //View
         builder.Services.AddTransient<PlayerView>();
         builder.Services.AddTransient<ArtistView>();
-        builder.Services.AddTransient<TrackView>();
+        builder.Services.AddSingleton<TrackView>();
         builder.Services.AddTransient<AlbumView>();
 
         //ViewModel

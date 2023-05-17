@@ -5,11 +5,15 @@ using CommunityToolkit.Maui.Views;
 using MauiTunes.ViewModels;
 using System.ComponentModel;
 using TinyMvvm;
+using Plugin.LocalNotification;
+
+using CommunityToolkit.Mvvm.Input;
 
 public partial class TrackView
 {
     private TrackViewModel viewmodel;
     private int count;
+    private string _deviceToken;
 	public TrackView(TrackViewModel vm)
 	{
 		InitializeComponent();
@@ -17,7 +21,23 @@ public partial class TrackView
         mediaElement.PropertyChanged += MediaElement_PropertyChanged;
         count = 0;
         viewmodel = vm;
+
+        LocalNotificationCenter.Current.NotificationActionTapped += Current_NotificationActionTapped;
     }
+
+    private async void Current_NotificationActionTapped(Plugin.LocalNotification.EventArgs.NotificationActionEventArgs e)
+    {
+        if (e.IsDismissed)
+        {
+
+        }
+        else if (e.IsTapped)
+        {
+            await Navigation.PopAsync();
+            await viewmodel.NavigateToTrack();
+        }
+    }
+
 
     void MediaElement_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
@@ -44,6 +64,22 @@ public partial class TrackView
 
     void OnPlayPauseClicked(object sender, EventArgs e)
     {
+        var request = new NotificationRequest
+        {
+            NotificationId = 1337,
+            Title = viewmodel.Name,
+            BadgeNumber = 42,
+            Schedule = new NotificationRequestSchedule
+            {
+                NotifyTime = DateTime.Now.AddSeconds(5),
+                NotifyRepeatInterval = TimeSpan.FromDays(1),
+            }
+            
+        };
+
+        LocalNotificationCenter.Current.Show(request);
+
+
         if (count == 0)
         {
             PlayPauseButton.Source = "pause_button.png";
